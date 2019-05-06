@@ -92,21 +92,23 @@ function updateText() {
     var words = [];
     for (var toParse of text) {
         var word = [];
-        for (var i = 0; i < toParse.length; i++) {
-            if (toParse.substring(i, i + 2).match("(ch|sh|th|ng|qu)")) {
-                word.push(toParse.substring(i, i + 2));
-                i++;
-            } else if (toParse[i] === "c") {
-                //soft c comes usually before i, e or y
-                if (i+1 < toParse.length && toParse[i+1].match("[iey]"))
-                    word.push("s");
-                else
-                    word.push("k");
-            } else {
-                word.push(toParse[i]);
+        if(toParse.trim()!=""){
+            for (var i = 0; i < toParse.length; i++) {
+                if (toParse.substring(i, i + 2).match("(ch|sh|th|ng|qu)")) {
+                    word.push(toParse.substring(i, i + 2));
+                    i++;
+                } else if (toParse[i] === "c") {
+                    //soft c comes usually before i, e or y
+                    if (i+1 < toParse.length && toParse[i+1].match("[iey]"))
+                        word.push("s");
+                    else
+                        word.push("k");
+                } else {
+                    word.push(toParse[i]);
+                }
             }
+            words.push(word);
         }
-        words.push(word);
     }
     generateWords(words);
 }
